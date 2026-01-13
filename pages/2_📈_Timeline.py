@@ -155,7 +155,7 @@ with map_col:
 
     if len(df_year) > 0:
         # PyDeck 3D HexagonLayer
-        layer = pdk.Layer(
+        hex_layer = pdk.Layer(
             "HexagonLayer",
             data=df_year,
             get_position=['longitude', 'latitude'],
@@ -183,10 +183,11 @@ with map_col:
             bearing=0
         )
 
+        # Use Carto dark basemap (no token required) with light boundaries
         deck = pdk.Deck(
-            layers=[layer],
+            layers=[hex_layer],
             initial_view_state=view_state,
-            map_style='mapbox://styles/mapbox/dark-v10',
+            map_style="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
             tooltip={
                 "html": "<b>Incidents:</b> {elevationValue}",
                 "style": {"backgroundColor": "steelblue", "color": "white"}

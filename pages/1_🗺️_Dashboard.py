@@ -194,11 +194,11 @@ if len(filtered_df) > 0:
         bearing=0
     )
 
-    # Create deck
+    # Create deck with Carto dark basemap (no token required)
     deck = pdk.Deck(
         layers=[hex_layer],
         initial_view_state=view_state,
-        map_style="mapbox://styles/mapbox/dark-v10",
+        map_style="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
         tooltip={
             "html": "<b>Incidents:</b> {elevationValue}",
             "style": {
@@ -207,9 +207,6 @@ if len(filtered_df) > 0:
             }
         }
     )
-
-    if MAPBOX_TOKEN:
-        deck.mapbox_key = MAPBOX_TOKEN
 
     st.pydeck_chart(deck)
 else:
