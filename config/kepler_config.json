@@ -1,0 +1,232 @@
+{
+  "version": "v1",
+  "config": {
+    "visState": {
+      "filters": [
+        {
+          "dataId": ["gtd"],
+          "id": "time_filter",
+          "name": ["event_date"],
+          "type": "timeRange",
+          "value": [0, 1609459200000],
+          "enlarged": true,
+          "plotType": "histogram",
+          "animationWindow": "free",
+          "yAxis": null,
+          "speed": 1
+        }
+      ],
+      "layers": [
+        {
+          "id": "points",
+          "type": "point",
+          "config": {
+            "dataId": "gtd",
+            "label": "Terrorist Incidents",
+            "color": [228, 26, 28],
+            "highlightColor": [252, 242, 26, 255],
+            "columns": {
+              "lat": "latitude",
+              "lng": "longitude"
+            },
+            "isVisible": true,
+            "visConfig": {
+              "radius": 5,
+              "fixedRadius": false,
+              "opacity": 0.6,
+              "outline": false,
+              "thickness": 2,
+              "strokeColor": null,
+              "colorRange": {
+                "name": "ColorBrewer Set1-6",
+                "type": "qualitative",
+                "category": "ColorBrewer",
+                "colors": [
+                  "#e41a1c",
+                  "#377eb8",
+                  "#4daf4a",
+                  "#984ea3",
+                  "#ff7f00",
+                  "#ffff33"
+                ]
+              },
+              "strokeColorRange": {
+                "name": "Global Warming",
+                "type": "sequential",
+                "category": "Uber",
+                "colors": [
+                  "#5A1846",
+                  "#900C3F",
+                  "#C70039",
+                  "#E3611C",
+                  "#F1920E",
+                  "#FFC300"
+                ]
+              },
+              "radiusRange": [1, 40],
+              "filled": true
+            },
+            "hidden": false,
+            "textLabel": []
+          },
+          "visualChannels": {
+            "colorField": {
+              "name": "attacktype1_txt",
+              "type": "string"
+            },
+            "colorScale": "ordinal",
+            "sizeField": {
+              "name": "total_casualties",
+              "type": "real"
+            },
+            "sizeScale": "sqrt"
+          }
+        },
+        {
+          "id": "hexbin",
+          "type": "hexagon",
+          "config": {
+            "dataId": "gtd",
+            "label": "Incident Density",
+            "color": [227, 26, 28],
+            "highlightColor": [252, 242, 26, 255],
+            "columns": {
+              "lat": "latitude",
+              "lng": "longitude"
+            },
+            "isVisible": true,
+            "visConfig": {
+              "opacity": 0.8,
+              "worldUnitSize": 50,
+              "resolution": 8,
+              "colorRange": {
+                "name": "Global Warming",
+                "type": "sequential",
+                "category": "Uber",
+                "colors": [
+                  "#5A1846",
+                  "#900C3F",
+                  "#C70039",
+                  "#E3611C",
+                  "#F1920E",
+                  "#FFC300"
+                ]
+              },
+              "coverage": 0.9,
+              "sizeRange": [0, 500],
+              "percentile": [0, 100],
+              "elevationPercentile": [0, 100],
+              "elevationScale": 100,
+              "enableElevationZoomFactor": true,
+              "colorAggregation": "count",
+              "sizeAggregation": "count",
+              "enable3d": true
+            },
+            "hidden": false,
+            "textLabel": []
+          },
+          "visualChannels": {}
+        },
+        {
+          "id": "heatmap",
+          "type": "heatmap",
+          "config": {
+            "dataId": "gtd",
+            "label": "Heatmap",
+            "color": [227, 26, 28],
+            "highlightColor": [252, 242, 26, 255],
+            "columns": {
+              "lat": "latitude",
+              "lng": "longitude"
+            },
+            "isVisible": false,
+            "visConfig": {
+              "opacity": 0.8,
+              "colorRange": {
+                "name": "Global Warming",
+                "type": "sequential",
+                "category": "Uber",
+                "colors": [
+                  "#5A1846",
+                  "#900C3F",
+                  "#C70039",
+                  "#E3611C",
+                  "#F1920E",
+                  "#FFC300"
+                ]
+              },
+              "radius": 30
+            },
+            "hidden": false,
+            "textLabel": []
+          },
+          "visualChannels": {
+            "weightField": {
+              "name": "total_casualties",
+              "type": "real"
+            },
+            "weightScale": "linear"
+          }
+        }
+      ],
+      "interactionConfig": {
+        "tooltip": {
+          "fieldsToShow": {
+            "gtd": [
+              {"name": "event_date", "format": null},
+              {"name": "country_txt", "format": null},
+              {"name": "city", "format": null},
+              {"name": "attacktype1_txt", "format": null},
+              {"name": "gname", "format": null},
+              {"name": "nkill", "format": null},
+              {"name": "nwound", "format": null}
+            ]
+          },
+          "compareMode": false,
+          "compareType": "absolute",
+          "enabled": true
+        },
+        "brush": {
+          "size": 0.5,
+          "enabled": false
+        },
+        "geocoder": {
+          "enabled": false
+        },
+        "coordinate": {
+          "enabled": false
+        }
+      },
+      "layerBlending": "normal",
+      "splitMaps": [],
+      "animationConfig": {
+        "currentTime": null,
+        "speed": 1
+      }
+    },
+    "mapState": {
+      "bearing": 0,
+      "dragRotate": true,
+      "latitude": 20,
+      "longitude": 0,
+      "pitch": 45,
+      "zoom": 1.5,
+      "isSplit": false
+    },
+    "mapStyle": {
+      "styleType": "dark",
+      "topLayerGroups": {},
+      "visibleLayerGroups": {
+        "label": true,
+        "road": true,
+        "border": false,
+        "building": true,
+        "water": true,
+        "land": true,
+        "3d building": false
+      },
+      "threeDBuildingColor": [9.665468314072013, 17.18305478057247, 31.1442867897876],
+      "mapStyles": {}
+    }
+  }
+}

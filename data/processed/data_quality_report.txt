@@ -1,0 +1,87 @@
+============================================================
+GTD DATA QUALITY REPORT
+============================================================
+
+Generated: 2026-01-13 19:59:37
+
+Total Records: 205,014
+
+----------------------------------------
+TEMPORAL DISTRIBUTION
+----------------------------------------
+Year Range: 1970 - 2020
+Years with data: 50
+Average incidents per year: 4100
+
+----------------------------------------
+GEOGRAPHIC COVERAGE
+----------------------------------------
+Countries: 203
+Regions: 12
+
+Incidents by Region:
+  Middle East & North Africa: 57,278
+  South Asia: 54,214
+  Sub-Saharan Africa: 23,164
+  South America: 18,974
+  Western Europe: 17,171
+  Southeast Asia: 13,964
+  Central America & Caribbean: 9,386
+  Eastern Europe: 5,299
+  North America: 3,841
+  East Asia: 839
+  Central Asia: 565
+  Australasia & Oceania: 319
+
+----------------------------------------
+ATTACK TYPES
+----------------------------------------
+Attack Types: 9
+  Bombing/Explosion: 96,699
+  Armed Assault: 47,978
+  Assassination: 21,040
+  Hostage Taking (Kidnapping): 13,517
+  Facility/Infrastructure Attack: 12,153
+  Unknown: 10,573
+  Unarmed Assault: 1,199
+  Hostage Taking (Barricade Incident): 1,127
+  Hijacking: 728
+
+----------------------------------------
+CASUALTY STATISTICS
+----------------------------------------
+Total Killed: 462,504
+Average per incident: 2.26
+Max in single incident: 1,700
+Total Wounded: 577,417
+Average per incident: 2.82
+
+----------------------------------------
+TOP PERPETRATOR GROUPS
+----------------------------------------
+Total Groups: 3652
+
+Top 15 Groups by Incident Count:
+  Unknown: 90,580
+  Taliban: 11,954
+  Islamic State of Iraq and the Levant (ISIL): 7,220
+  Al-Shabaab: 4,403
+  Shining Path (SL): 4,315
+  Boko Haram: 3,307
+  New People's Army (NPA): 3,125
+  Houthi extremists (Ansar Allah): 3,111
+  Farabundo Marti National Liberation Front (FMLN): 2,991
+  Irish Republican Army (IRA): 2,661
+  Kurdistan Workers' Party (PKK): 2,445
+  Revolutionary Armed Forces of Colombia (FARC): 2,335
+  Communist Party of India - Maoist (CPI-Maoist): 2,091
+  Maoists: 2,087
+  Basque Fatherland and Freedom (ETA): 1,993
+
+----------------------------------------
+MISSING VALUES
+----------------------------------------
+  city: 420 (0.2%)
+  summary: 62,512 (30.5%)
+
+============================================================
