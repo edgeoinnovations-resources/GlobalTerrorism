@@ -293,3 +293,46 @@ st.download_button(
     file_name="gtd_filtered_data.csv",
     mime="text/csv"
 )
+
+# ============================================
+# DECADE COMPARISON SECTION
+# ============================================
+st.markdown("---")
+st.subheader("📊 Decade Comparison")
+
+import plotly.express as px
+
+# Create decade column
+decade_df = filtered_df.copy()
+decade_df['decade'] = (decade_df['iyear'] // 10) * 10
+decade_labels = {1970: '1970s', 1980: '1980s', 1990: '1990s', 2000: '2000s', 2010: '2010s', 2020: '2020s'}
+decade_df['decade_label'] = decade_df['decade'].map(decade_labels)
+
+# Aggregate by decade
+decade_summary = decade_df.groupby(['decade', 'decade_label']).agg({
+    'eventid': 'count',
+    'nkill': 'sum',
+    'nwound': 'sum',
+    'country_txt': 'nunique'
+}).reset_index()
+decade_summary.columns = ['Decade_Num', 'Decade', 'Incidents', 'Killed', 'Wounded', 'Countries']
+decade_summary = decade_summary.sort_values('Decade_Num')
+
+# Create comparison bar chart
+fig_decade = px.bar(
+    decade_summary,
+    x='Decade',
+    y=['Incidents', 'Killed', 'Wounded'],
+    barmode='group',
+    title='',
+    color_discrete_sequence=['#e41a1c', '#377eb8', '#4daf4a']
+)
+
+fig_decade.update_layout(
+    template='plotly_dark',
+    height=350,
+    legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
+    margin=dict(l=40, r=40, t=40, b=40)
+)
+
+st.plotly_chart(fig_decade, use_container_width=True)

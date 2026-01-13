@@ -5,6 +5,8 @@ Main entry point for the Streamlit application.
 """
 
 import streamlit as st
+from pathlib import Path
+import pandas as pd
 
 # Page configuration - must be first Streamlit command
 st.set_page_config(
@@ -56,13 +58,46 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+@st.cache_data
+def load_summary():
+    """Load summary statistics from the data."""
+    data_path = Path("data/processed/gtd_processed.parquet")
+    if data_path.exists():
+        df = pd.read_parquet(data_path)
+        return {
+            'incidents': len(df),
+            'countries': df['country_txt'].nunique(),
+            'years': f"{df['iyear'].min()}-{df['iyear'].max()}",
+            'groups': df['gname'].nunique() if 'gname' in df.columns else 0,
+            'killed': int(df['nkill'].sum()) if 'nkill' in df.columns else 0,
+            'wounded': int(df['nwound'].sum()) if 'nwound' in df.columns else 0
+        }
+    return None
+
+
 def main():
     """Main application entry point."""
     # Header
-    st.markdown('<p class="main-header">Global Terrorism Database</p>', unsafe_allow_html=True)
+    st.markdown('<p class="main-header">🌍 Global Terrorism Database Explorer</p>', unsafe_allow_html=True)
     st.markdown('<p class="sub-header">Interactive Visualization Suite (1970-2020)</p>', unsafe_allow_html=True)
 
     st.markdown("---")
+
+    # Load stats
+    stats = load_summary()
+
+    # Quick Stats Row
+    if stats:
+        st.subheader("📊 Database Overview")
+        c1, c2, c3, c4, c5, c6 = st.columns(6)
+        c1.metric("Total Incidents", f"{stats['incidents']:,}")
+        c2.metric("Countries", stats['countries'])
+        c3.metric("Time Span", stats['years'])
+        c4.metric("Groups", f"{stats['groups']:,}")
+        c5.metric("Total Killed", f"{stats['killed']:,}")
+        c6.metric("Total Wounded", f"{stats['wounded']:,}")
+
+        st.markdown("---")
 
     # Welcome content
     col1, col2 = st.columns([2, 1])
@@ -77,29 +112,31 @@ def main():
 
         **Navigate using the sidebar to explore:**
 
-        - **Dashboard**: Interactive 3D map with incident density, KPIs, and trend charts
-        - **Timeline**: Animated visualizations showing terrorism spread over time
-        - **Groups**: Analysis of perpetrator groups and their activities
-        - **About**: Data source information and methodology
+        - 🗺️ **Dashboard** - Overview with 3D maps and key metrics
+        - 📈 **Timeline** - Animated temporal analysis with year slider
+        - 👥 **Groups** - Perpetrator organization analysis
+        - 🔍 **Country Deep Dive** - Detailed country-level exploration
+        - ℹ️ **About** - Data sources and methodology
 
-        **Use the filters in the sidebar** to focus on specific:
-        - Time periods (years)
-        - Geographic regions
-        - Attack types
-        - Target types
+        **Use the filters** to focus on specific time periods, regions, attack types, and more.
         """)
 
     with col2:
         st.markdown("""
-        ### Quick Stats
+        ### What's New
 
-        The GTD contains information on:
-        - **210,000+** terrorist incidents
-        - **50 years** of data (1970-2020)
-        - **200+** countries
-        - **3,500+** perpetrator groups
+        **Enhanced Timeline Page:**
+        - Year slider controls all visualizations
+        - 3D HexagonLayer hotspot map
+        - Animated country choropleth
+        - Regional stacked area chart
+        - Attack type breakdown
 
-        Use the pages in the sidebar to explore the data interactively.
+        **Country Deep Dive:**
+        - Select any country for detailed analysis
+        - City-level incident mapping
+        - Perpetrator group statistics
+        - Decade-by-decade trends
         """)
 
     st.markdown("---")
@@ -111,26 +148,26 @@ def main():
 
     with col1:
         st.markdown("""
-        #### Interactive Maps
+        #### 🗺️ Interactive Maps
         3D hexagon density maps and scatterplot visualizations with full pan/zoom support.
         """)
 
     with col2:
         st.markdown("""
-        #### Time Analysis
+        #### 📈 Time Analysis
         Animated timelines showing the spread and evolution of terrorism over 50 years.
         """)
 
     with col3:
         st.markdown("""
-        #### Group Analysis
+        #### 👥 Group Analysis
         Detailed breakdowns of perpetrator groups, their methods, and geographic focus.
         """)
 
     with col4:
         st.markdown("""
-        #### Dynamic Filtering
-        Real-time filtering by region, attack type, time period, and more.
+        #### 🔍 Country Drill-Down
+        Deep dive into any country with city-level maps and historical trends.
         """)
 
     st.markdown("---")
